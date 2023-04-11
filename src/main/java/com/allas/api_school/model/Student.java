@@ -1,5 +1,6 @@
 package com.allas.api_school.model;
 
+import com.allas.api_school.dto.DataStudent;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -24,6 +25,12 @@ public class Student {
         this.name = name;
         this.address = address;
         this.birthdate = birthdate;
+    }
+
+    public Student(DataStudent dataStudent) {
+        this.name = dataStudent.getName();
+        this.address = dataStudent.getAddress();
+        this.birthdate = dataStudent.getBirthdate();
     }
 
     public String getId() {
