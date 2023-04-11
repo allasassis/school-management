@@ -1,6 +1,7 @@
 package com.allas.api_school.controller;
 
 import com.allas.api_school.dto.DataTeacher;
+import com.allas.api_school.dto.DataUpdateTeacher;
 import com.allas.api_school.exception.ApiException;
 import com.allas.api_school.model.Teacher;
 import com.allas.api_school.repository.TeacherRepository;
@@ -31,15 +32,31 @@ public class TeacherController {
         return ResponseEntity.status(201).body(teacher);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<DataTeacher> updateTeacher(@RequestBody DataUpdateTeacher dataUpdateTeacher, @PathVariable String id) {
+        Teacher teacher = findTeacher(id);
+
+        teacher.update(dataUpdateTeacher);
+        teacherRepository.save(teacher);
+
+        return ResponseEntity.ok(new DataTeacher(teacher));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity deleteTeacher(@PathVariable String id) {
+        Teacher teacher = findTeacher(id);
+
+        teacherRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    private Teacher findTeacher(String id) {
         Optional<Teacher> teacher = teacherRepository.findById(id);
 
         if (teacher.isEmpty()) {
             throw new ApiException("This ID does not exist in our database!");
         }
 
-        teacherRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
+        return teacher.get();
     }
 }

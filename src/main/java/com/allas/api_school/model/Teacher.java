@@ -1,6 +1,7 @@
 package com.allas.api_school.model;
 
 import com.allas.api_school.dto.DataTeacher;
+import com.allas.api_school.dto.DataUpdateTeacher;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -37,5 +38,14 @@ public class Teacher {
 
     public String getSubject() {
         return subject;
+    }
+
+    public void update(DataUpdateTeacher dataUpdateTeacher) {
+        if (dataUpdateTeacher.getName() != null) {
+            this.name = dataUpdateTeacher.getName();
+        }
+        if (dataUpdateTeacher.getSubject() != null) {
+            this.subject = dataUpdateTeacher.getSubject();
+        }
     }
 }
