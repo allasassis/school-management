@@ -20,8 +20,8 @@ public class TeacherController {
     private TeacherRepository teacherRepository;
 
     @GetMapping
-    public ResponseEntity<List<Teacher>> listTeachers() {
-        List<Teacher> list = teacherRepository.findAll();
+    public ResponseEntity<List<DataTeacher>> listTeachers() {
+        List<DataTeacher> list = teacherRepository.findAll().stream().map(DataTeacher::new).toList();
         return ResponseEntity.ok(list);
     }
 
