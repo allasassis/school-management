@@ -1,6 +1,5 @@
 package com.allas.api_school.model;
 
-import jakarta.validation.constraints.Pattern;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("addresses")
