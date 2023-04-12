@@ -1,5 +1,6 @@
 package com.allas.api_school.model;
 
+import com.allas.api_school.dto.DataUpdateAddress;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("addresses")
@@ -40,5 +41,23 @@ public class Address {
 
     public Integer getZipCode() {
         return zipCode;
+    }
+
+    public void update(DataUpdateAddress address) {
+        if (address.getStreet() != null) {
+            this.street = address.getStreet();
+        }
+        if (address.getNumber() != null) {
+            this.number = address.getNumber();
+        }
+        if (address.getCity() != null) {
+            this.city = address.getCity();
+        }
+        if (address.getState() != null) {
+            this.state = address.getState();
+        }
+        if (address.getZipCode() != null) {
+            this.zipCode = address.getZipCode();
+        }
     }
 }

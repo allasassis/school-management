@@ -1,6 +1,7 @@
 package com.allas.api_school.model;
 
 import com.allas.api_school.dto.DataStudent;
+import com.allas.api_school.dto.DataUpdateStudent;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -47,5 +48,17 @@ public class Student {
 
     public LocalDate getBirthdate() {
         return birthdate;
+    }
+
+    public void update(DataUpdateStudent dataUpdateStudent) {
+        if (dataUpdateStudent.getName() != null) {
+            this.name = dataUpdateStudent.getName();
+        }
+        if (dataUpdateStudent.getBirthdate() != null) {
+            this.birthdate = dataUpdateStudent.getBirthdate();
+        }
+        if (dataUpdateStudent.getAddress() != null) {
+            address.update(dataUpdateStudent.getAddress());
+        }
     }
 }

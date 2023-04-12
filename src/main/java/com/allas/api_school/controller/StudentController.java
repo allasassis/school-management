@@ -2,6 +2,7 @@ package com.allas.api_school.controller;
 
 import com.allas.api_school.dto.DataListStudent;
 import com.allas.api_school.dto.DataStudent;
+import com.allas.api_school.dto.DataUpdateStudent;
 import com.allas.api_school.exception.ApiException;
 import com.allas.api_school.model.Student;
 import com.allas.api_school.model.Teacher;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.crypto.Data;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +33,15 @@ public class StudentController {
         Student student = new Student(dataStudent);
         studentRepository.save(student);
         return ResponseEntity.status(201).body(new DataStudent(student));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<DataStudent> updateStudent(@PathVariable String id, @RequestBody DataUpdateStudent dataUpdateStudent) {
+        Student student = findStudent(id);
+        student.update(dataUpdateStudent);
+        studentRepository.save(student);
+
+        return ResponseEntity.ok(new DataStudent(student));
     }
 
     @DeleteMapping("/{id}")
