@@ -9,4 +9,6 @@ import java.util.Optional;
 
 public interface StudentRepository extends MongoRepository<Student, String> {
     List<Optional<Student>> findByName(String name);
+
+    List<Optional<Student>> findByAddressZipCode(Integer zipcode);
 }

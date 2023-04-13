@@ -6,13 +6,11 @@ import com.allas.api_school.dto.DataStudentListDetails;
 import com.allas.api_school.dto.DataUpdateStudent;
 import com.allas.api_school.exception.ApiException;
 import com.allas.api_school.model.Student;
-import com.allas.api_school.model.Teacher;
 import com.allas.api_school.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -34,24 +32,28 @@ public class StudentController {
     public ResponseEntity findStudentByName(@PathVariable String name) {
         List<Optional<Student>> studentList = studentRepository.findByName(name);
 
-        if (studentList.isEmpty()) {
-            throw new ApiException("Student is null!");
-        }
+        verifyIfIsEmpty(studentList);
 
         if (studentList.size() > 1) {
-
-            List<Student> list = new ArrayList<>();
-
-            for (Optional<Student> student1 : studentList) {
-                list.add(student1.get());
-            }
-
-            List<DataStudentListDetails> listStudents = list.stream().map(DataStudentListDetails::new).toList();
+            List<DataStudentListDetails> listStudents = listConversorStudents(studentList);
             return ResponseEntity.ok(listStudents);
         }
 
-        Student student = studentList.get(0).get();
-        return ResponseEntity.ok(new DataStudent(student));
+        return ResponseEntity.ok(new DataStudent(studentList.get(0).get()));
+    }
+
+    @GetMapping("/address/{zipcode}")
+    public ResponseEntity findStudentByZipCode(@PathVariable Integer zipcode) {
+        List<Optional<Student>> studentList = studentRepository.findByAddressZipCode(zipcode);
+        verifyIfIsEmpty(studentList);
+
+        if (studentList.size() > 1) {
+            List<DataStudentListDetails> listStudents = listConversorStudents(studentList);
+            return ResponseEntity.ok(listStudents);
+        }
+
+        return ResponseEntity.ok(new DataStudent(studentList.get(0).get()));
+
     }
 
     @PostMapping
@@ -63,7 +65,7 @@ public class StudentController {
 
     @PutMapping("/{id}")
     public ResponseEntity<DataStudent> updateStudent(@PathVariable String id, @RequestBody DataUpdateStudent dataUpdateStudent) {
-        Student student = findStudent(id);
+        Student student = findStudentById(id);
         student.update(dataUpdateStudent);
         studentRepository.save(student);
 
@@ -72,12 +74,12 @@ public class StudentController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteStudent(@PathVariable String id) {
-        Student student = findStudent(id);
+        Student student = findStudentById(id);
         studentRepository.delete(student);
         return ResponseEntity.noContent().build();
     }
 
-    private Student findStudent(String id) {
+    private Student findStudentById(String id) {
         Optional<Student> student = studentRepository.findById(id);
 
         if (student.isEmpty()) {
@@ -85,5 +87,21 @@ public class StudentController {
         }
 
         return student.get();
+    }
+
+    private void verifyIfIsEmpty(List<Optional<Student>> studentList) {
+        if (studentList.isEmpty()) {
+            throw new ApiException("Student is null!");
+        }
+    }
+
+    private List<DataStudentListDetails> listConversorStudents(List<Optional<Student>> studentList) {
+        List<Student> list = new ArrayList<>();
+
+        for (Optional<Student> student1 : studentList) {
+            list.add(student1.get());
+        }
+
+        return list.stream().map(DataStudentListDetails::new).toList();
     }
 }
