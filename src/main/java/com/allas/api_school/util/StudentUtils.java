@@ -1,4 +1,4 @@
-package com.allas.api_school.utils;
+package com.allas.api_school.util;
 
 import com.allas.api_school.dto.DataStudentListDetails;
 import com.allas.api_school.exception.ApiException;

@@ -1,12 +1,9 @@
 package com.allas.api_school.controller;
 
-import com.allas.api_school.dto.DataListStudent;
-import com.allas.api_school.dto.DataStudent;
-import com.allas.api_school.dto.DataStudentListDetails;
-import com.allas.api_school.dto.DataUpdateStudent;
+import com.allas.api_school.dto.*;
 import com.allas.api_school.model.Student;
 import com.allas.api_school.repository.StudentRepository;
-import com.allas.api_school.utils.StudentUtils;
+import com.allas.api_school.util.StudentUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,23 +22,21 @@ public class StudentController {
     private StudentUtils studentUtils;
 
     @GetMapping
-    public ResponseEntity<List<DataListStudent>> listStudents() {
-        List<DataListStudent> list = studentRepository.findAll().stream().map(DataListStudent::new).toList();
+    public ResponseEntity<List<DataListStudent>> listStudentsMatriculated() {
+        List<DataListStudent> list = studentRepository.findAllMatriculatedStudents().stream().map(DataListStudent::new).toList();
         return ResponseEntity.ok(list);
     }
 
     @GetMapping("/{name}")
     public ResponseEntity findStudentByName(@PathVariable String name) {
         List<Optional<Student>> studentList = studentRepository.findByName(name);
-
         studentUtils.verifyIfIsEmpty(studentList);
 
         if (studentList.size() > 1) {
-            List<DataStudentListDetails> listStudents = studentUtils.listConversorStudents(studentList);
-            return ResponseEntity.ok(listStudents);
+            return ResponseEntity.ok(studentUtils.listConversorStudents(studentList));
         }
 
-        return ResponseEntity.ok(new DataStudent(studentList.get(0).get()));
+        return ResponseEntity.ok(new DataDetailStudent(studentList.get(0).get()));
     }
 
     @GetMapping("/address/{zipcode}")
@@ -50,12 +45,10 @@ public class StudentController {
         studentUtils.verifyIfIsEmpty(studentList);
 
         if (studentList.size() > 1) {
-            List<DataStudentListDetails> listStudents = studentUtils.listConversorStudents(studentList);
-            return ResponseEntity.ok(listStudents);
+            return ResponseEntity.ok(studentUtils.listConversorStudents(studentList));
         }
 
-        return ResponseEntity.ok(new DataStudent(studentList.get(0).get()));
-
+        return ResponseEntity.ok(new DataDetailStudent(studentList.get(0).get()));
     }
 
     @PostMapping
@@ -75,9 +68,11 @@ public class StudentController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteStudent(@PathVariable String id) {
+    public ResponseEntity unenrollStudent(@PathVariable String id) {
         Student student = studentUtils.findStudentById(id);
-        studentRepository.delete(student);
+        student.unenroll();
+        studentRepository.save(student);
+
         return ResponseEntity.noContent().build();
     }
 

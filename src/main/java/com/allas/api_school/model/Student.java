@@ -17,6 +17,7 @@ public class Student {
 
     private Address address;
     private LocalDate birthdate;
+    private boolean matriculated = true;
 
     public Student() {
     }
@@ -60,5 +61,13 @@ public class Student {
         if (dataUpdateStudent.getAddress() != null) {
             address.update(dataUpdateStudent.getAddress());
         }
+    }
+
+    public boolean isMatriculate() {
+        return matriculated;
+    }
+
+    public void unenroll() {
+        this.matriculated = false;
     }
 }
