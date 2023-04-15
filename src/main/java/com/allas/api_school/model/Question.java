@@ -13,6 +13,8 @@ public class Question {
     private String title;
     private String description;
     private Subject subject;
+    private boolean isSolved = false;
+
 
     public Question() {
     }
@@ -42,5 +44,9 @@ public class Question {
 
     public Subject getSubject() {
         return subject;
+    }
+
+    public void markAsSolved() {
+        this.isSolved = true;
     }
 }
