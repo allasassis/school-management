@@ -7,6 +7,7 @@ import com.allas.api_school.dto.student.DataUpdateStudent;
 import com.allas.api_school.model.Student;
 import com.allas.api_school.repository.StudentRepository;
 import com.allas.api_school.util.StudentUtils;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -55,7 +56,7 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<DataStudent> insertStudent(@RequestBody DataStudent dataStudent) {
+    public ResponseEntity<DataStudent> insertStudent(@RequestBody @Valid DataStudent dataStudent) {
         Student student = new Student(dataStudent);
         studentRepository.save(student);
         return ResponseEntity.status(201).body(new DataStudent(student));

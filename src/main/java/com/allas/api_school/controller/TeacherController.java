@@ -1,12 +1,15 @@
 package com.allas.api_school.controller;
 
+import com.allas.api_school.dto.teacher.DataDetailTeacher;
 import com.allas.api_school.dto.teacher.DataTeacher;
 import com.allas.api_school.dto.teacher.DataUpdateTeacher;
 import com.allas.api_school.exception.ApiException;
 import com.allas.api_school.model.Teacher;
 import com.allas.api_school.repository.TeacherRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,26 +23,26 @@ public class TeacherController {
     private TeacherRepository teacherRepository;
 
     @GetMapping
-    public ResponseEntity<List<DataTeacher>> listTeachers() {
-        List<DataTeacher> list = teacherRepository.findAll().stream().map(DataTeacher::new).toList();
+    public ResponseEntity<List<DataDetailTeacher>> listTeachers() {
+        List<DataDetailTeacher> list = teacherRepository.findAll().stream().map(DataDetailTeacher::new).toList();
         return ResponseEntity.ok(list);
     }
 
     @PostMapping
-    public ResponseEntity<Teacher> insertTeacher(@RequestBody DataTeacher dataTeacher) {
+    public ResponseEntity<DataDetailTeacher> insertTeacher(@RequestBody @Valid DataTeacher dataTeacher) {
         Teacher teacher = new Teacher(dataTeacher);
         teacherRepository.save(teacher);
-        return ResponseEntity.status(201).body(teacher);
+        return ResponseEntity.status(201).body(new DataDetailTeacher(teacher));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<DataTeacher> updateTeacher(@RequestBody DataUpdateTeacher dataUpdateTeacher, @PathVariable String id) {
+    public ResponseEntity<DataDetailTeacher> updateTeacher(@RequestBody DataUpdateTeacher dataUpdateTeacher, @PathVariable String id) {
         Teacher teacher = findTeacher(id);
 
         teacher.update(dataUpdateTeacher);
         teacherRepository.save(teacher);
 
-        return ResponseEntity.ok(new DataTeacher(teacher));
+        return ResponseEntity.ok(new DataDetailTeacher(teacher));
     }
 
     @DeleteMapping("/{id}")

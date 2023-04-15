@@ -1,21 +1,23 @@
 package com.allas.api_school.dto.teacher;
 
 import com.allas.api_school.model.Teacher;
-import jakarta.validation.constraints.NotBlank;
 
-public class DataTeacher {
+public class DataDetailTeacher {
 
-    @NotBlank
     private String name;
-    @NotBlank
     private String subject;
 
-    public DataTeacher() {
+    public DataDetailTeacher() {
     }
 
-    public DataTeacher(String name, String subject) {
+    public DataDetailTeacher(String name, String subject) {
         this.name = name;
         this.subject = subject;
+    }
+
+    public DataDetailTeacher(Teacher teacher) {
+        this.name = teacher.getName();
+        this.subject = teacher.getSubject();
     }
 
     public String getName() {
@@ -25,5 +27,4 @@ public class DataTeacher {
     public String getSubject() {
         return subject;
     }
-
 }

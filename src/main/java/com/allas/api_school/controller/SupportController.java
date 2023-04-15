@@ -4,6 +4,7 @@ import com.allas.api_school.dto.support.DataListQuestions;
 import com.allas.api_school.dto.support.DataQuestion;
 import com.allas.api_school.model.Question;
 import com.allas.api_school.repository.QuestionRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ public class SupportController {
     }
 
     @PostMapping
-    public ResponseEntity<DataQuestion> postQuestion(@RequestBody DataQuestion dataQuestion) {
+    public ResponseEntity<DataQuestion> postQuestion(@RequestBody @Valid DataQuestion dataQuestion) {
         questionRepository.save(new Question(dataQuestion));
         return ResponseEntity.status(201).body(dataQuestion);
     }
