@@ -1,6 +1,6 @@
 package com.allas.api_school.util;
 
-import com.allas.api_school.dto.DataStudentListDetails;
+import com.allas.api_school.dto.student.DataStudentListDetails;
 import com.allas.api_school.exception.ApiException;
 import com.allas.api_school.model.Student;
 import com.allas.api_school.repository.StudentRepository;

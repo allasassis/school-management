@@ -1,4 +1,4 @@
-package com.allas.api_school.dto;
+package com.allas.api_school.dto.student;
 
 public class DataUpdateAddress {
 

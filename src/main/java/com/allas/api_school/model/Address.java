@@ -1,6 +1,6 @@
 package com.allas.api_school.model;
 
-import com.allas.api_school.dto.DataUpdateAddress;
+import com.allas.api_school.dto.student.DataUpdateAddress;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("addresses")

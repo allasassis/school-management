@@ -1,7 +1,7 @@
 package com.allas.api_school.model;
 
-import com.allas.api_school.dto.DataTeacher;
-import com.allas.api_school.dto.DataUpdateTeacher;
+import com.allas.api_school.dto.teacher.DataTeacher;
+import com.allas.api_school.dto.teacher.DataUpdateTeacher;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

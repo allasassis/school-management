@@ -1,6 +1,9 @@
 package com.allas.api_school.controller;
 
-import com.allas.api_school.dto.*;
+import com.allas.api_school.dto.student.DataDetailStudent;
+import com.allas.api_school.dto.student.DataListStudent;
+import com.allas.api_school.dto.student.DataStudent;
+import com.allas.api_school.dto.student.DataUpdateStudent;
 import com.allas.api_school.model.Student;
 import com.allas.api_school.repository.StudentRepository;
 import com.allas.api_school.util.StudentUtils;

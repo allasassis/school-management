@@ -1,4 +1,4 @@
-package com.allas.api_school.dto;
+package com.allas.api_school.dto.teacher;
 
 import com.allas.api_school.model.Teacher;
 import jakarta.validation.constraints.NotBlank;

@@ -1,6 +1,4 @@
-package com.allas.api_school.dto;
-
-import com.allas.api_school.model.Address;
+package com.allas.api_school.dto.student;
 
 import java.time.LocalDate;
 

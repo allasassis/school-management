@@ -1,7 +1,7 @@
 package com.allas.api_school.controller;
 
-import com.allas.api_school.dto.DataTeacher;
-import com.allas.api_school.dto.DataUpdateTeacher;
+import com.allas.api_school.dto.teacher.DataTeacher;
+import com.allas.api_school.dto.teacher.DataUpdateTeacher;
 import com.allas.api_school.exception.ApiException;
 import com.allas.api_school.model.Teacher;
 import com.allas.api_school.repository.TeacherRepository;

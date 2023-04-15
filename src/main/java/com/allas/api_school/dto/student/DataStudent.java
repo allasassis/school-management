@@ -1,4 +1,4 @@
-package com.allas.api_school.dto;
+package com.allas.api_school.dto.student;
 
 import com.allas.api_school.model.Address;
 import com.allas.api_school.model.Student;
@@ -8,25 +8,27 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
-public class DataDetailStudent {
+public class DataStudent {
 
+    @NotBlank
     private String name;
 
+    @NotNull
+    @Valid
     private Address address;
-
+    @NotNull
     private LocalDate birthdate;
-    private boolean matriculated;
 
-    public DataDetailStudent() {
+    public DataStudent() {
     }
 
-    public DataDetailStudent(String name, Address address, LocalDate birthdate) {
+    public DataStudent(String name, Address address, LocalDate birthdate) {
         this.name = name;
         this.address = address;
         this.birthdate = birthdate;
     }
 
-    public DataDetailStudent(Student student) {
+    public DataStudent(Student student) {
         this.name = student.getName();
         this.address = student.getAddress();
         this.birthdate = student.getBirthdate();
