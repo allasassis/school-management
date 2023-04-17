@@ -11,4 +11,9 @@ public class ErrorHandler {
     public ResponseEntity errorApiException(ApiException e) {
         return ResponseEntity.badRequest().body(e.getMessage());
     }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity badRequestException(RuntimeException e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
 }
