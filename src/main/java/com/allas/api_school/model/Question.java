@@ -46,6 +46,10 @@ public class Question {
         return subject;
     }
 
+    public boolean isSolved() {
+        return isSolved;
+    }
+
     public void markAsSolved() {
         this.isSolved = true;
     }
