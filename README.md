@@ -1,4 +1,4 @@
-# Stock Management API
+# School Management API
 ### EN-US:
 An RESTful API made in Java, for school management.
 
@@ -61,7 +61,7 @@ run it, after that consult the documentation with all the methods in the link be
 https://www.linkedin.com/in/allasassis
 
 --------------------------------------------------------
-# API de gerenciamento de estoque
+# API de gerenciamento de escola
 ### PT-BR:
 
 Uma API RESTful feita em Java, para gerenciamento de estoque.
