@@ -6,6 +6,7 @@ import com.allas.api_school.dto.teacher.DataUpdateTeacher;
 import com.allas.api_school.exception.ApiException;
 import com.allas.api_school.model.Teacher;
 import com.allas.api_school.repository.TeacherRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/teacher")
+@SecurityRequirement(name = "bearer-key")
 public class TeacherController {
 
     @Autowired

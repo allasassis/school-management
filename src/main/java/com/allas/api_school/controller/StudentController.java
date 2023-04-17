@@ -7,6 +7,7 @@ import com.allas.api_school.dto.student.DataUpdateStudent;
 import com.allas.api_school.model.Student;
 import com.allas.api_school.repository.StudentRepository;
 import com.allas.api_school.util.StudentUtils;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/student")
+@SecurityRequirement(name = "bearer-key")
 public class StudentController {
 
     @Autowired

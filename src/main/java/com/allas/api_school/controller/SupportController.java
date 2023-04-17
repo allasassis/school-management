@@ -5,6 +5,7 @@ import com.allas.api_school.dto.support.DataQuestion;
 import com.allas.api_school.exception.ApiException;
 import com.allas.api_school.model.Question;
 import com.allas.api_school.repository.QuestionRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/support")
+@SecurityRequirement(name = "bearer-key")
 public class SupportController {
 
     @Autowired
