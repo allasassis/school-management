@@ -64,8 +64,6 @@ https://www.linkedin.com/in/allasassis
 # API de gerenciamento de escola
 ### PT-BR:
 
-Uma API RESTful feita em Java, para gerenciamento de estoque.
-
 Trata-se de uma API feita em Java para gestão escolar: alunos, professores e suporte (um controlador criado para os alunos tirarem dúvidas para seus professores). <br>
 Possui um método de autenticação utilizado com Spring Security, onde o usuário precisa
 registrar-se e fazer o login para gerar um código JWT que acompanhará todas as solicitações do usuário na API. Todas as funções usam DTO na entrada e saída de dados.
